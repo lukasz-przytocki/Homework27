@@ -19,25 +19,23 @@ public class AuctionController {
     }
 
     @GetMapping("/auctions")
-    public String auctions(Model model,
-                           @RequestParam(required = false) String sort,
-                           String auctionFilters) {
+    public String auctions(Model model, @RequestParam(required = false) String sort, String auctionFilters) {
         List<Auction> auctions;
 
         if (sort==null) {
             auctions = auctionRepositiry.findAll();
-        }else if (auctionFilters.contains("title")) {
+        }else if (sort.contains("title")) {
             auctions = auctionRepositiry.findAllByOrderByTitle();
-        } else if (auctionFilters.contains("carMaker")) {
+        } else if (sort.contains("carMaker")) {
             auctions = auctionRepositiry.findAllByOrderByCarMake();
-        } else if (auctionFilters.contains("carModel")) {
+        } else if (sort.contains("carModel")) {
             auctions = auctionRepositiry.findAllByOrderByCarModel();
         } else {
             auctions = auctionRepositiry.findAllByOrderByColor();
         }
 
         model.addAttribute("cars", auctions);
-        model.addAttribute("filters", auctionFilters);
+ //       model.addAttribute("filters", auctionFilters);
         return "auctions";
     }
 }

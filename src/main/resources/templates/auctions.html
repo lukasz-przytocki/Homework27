@@ -7,11 +7,11 @@
 <div class="content">
     <h1 style="text-align: center" class="mt-4">WSZYSTKIE AUKCJE</h1>
 
-    <form action="/auctions" method="get" th:object="${filters}">
+    <form action="/auctions" method="get">
 <!--        <input type="text" placeholder="Tytuł aukcji" th:field="*{title}">-->
-        <input type="text" placeholder="Producent" th:field="*{carMaker}">
-        <input type="text" placeholder="Marka" th:field="*{carModel}">
-        <input type="text" placeholder="Kolor" th:field="*{color}">
+        <input type="text" placeholder="Producent" field="Producer">
+        <input type="text" placeholder="Marka" field="Model">
+        <input type="text" placeholder="Kolor" field="Color">
         <input type="submit" value="Filtruj" class="btn btn-primary"/>
     </form>
 
