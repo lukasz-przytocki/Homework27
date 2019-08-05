@@ -4,12 +4,18 @@
 </head>
 <body>
 <div th:replace="fragments :: header"></div>
+-->
 <div class="content">
     <h1 style="text-align: center" class="mt-4">NAJLEPSZE OFERTY</h1>
 
     <div th:each="car: ${cars}">
-        <h2 th:text="${car.title}"></h2>
-        <p th:text="|Cena: ${car.price} zł|"></p>
+        <h2 th:text="${car.carMake}"></h2>
+        <h2 th:text="${car.carModel}"></h2>
+        <h6 th:text="${car.color}"></h6>
+        <font color="red">
+            <p th:text="|Cena: ${car.price} zł|"></p>
+        </font>
+
     </div>
 
     <a href="/auctions">Zobacz wszystkie dostępne samochody</a>

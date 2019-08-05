@@ -20,6 +20,7 @@ public class AuctionService {
 
     private List<Auction> auctions;
 
+
     private static final String[] ADJECTIVES = {"Niesamowity", "Jedyny taki", "IGŁA", "HIT", "Jak nowy",
             "Perełka", "OKAZJA", "Wyjątkowy"};
 
@@ -58,6 +59,7 @@ public class AuctionService {
                 .sorted(Comparator.comparing(Auction::getPrice).reversed())
                 .limit(4)
                 .collect(Collectors.toList());
+
     }
 
     public List<Auction> findAllForFilters(AuctionFilters auctionFilters) {

@@ -1,5 +1,6 @@
 package pl.javastart.sellegro.auction;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,21 +11,29 @@ import java.util.List;
 @Controller
 public class AuctionController {
 
-    private AuctionService auctionService;
+    private AuctionRepositiry auctionRepositiry;
 
-    public AuctionController(AuctionService auctionService) {
-        this.auctionService = auctionService;
+
+    public AuctionController(AuctionRepositiry auctionRepositiry) {
+        this.auctionRepositiry = auctionRepositiry;
     }
 
     @GetMapping("/auctions")
     public String auctions(Model model,
                            @RequestParam(required = false) String sort,
-                           AuctionFilters auctionFilters) {
+                           String auctionFilters) {
         List<Auction> auctions;
-        if(sort != null) {
-            auctions = auctionService.findAllSorted(sort);
+
+        if (sort==null) {
+            auctions = auctionRepositiry.findAll();
+        }else if (auctionFilters.contains("title")) {
+            auctions = auctionRepositiry.findAllByOrderByTitle();
+        } else if (auctionFilters.contains("carMaker")) {
+            auctions = auctionRepositiry.findAllByOrderByCarMake();
+        } else if (auctionFilters.contains("carModel")) {
+            auctions = auctionRepositiry.findAllByOrderByCarModel();
         } else {
-            auctions = auctionService.findAllForFilters(auctionFilters);
+            auctions = auctionRepositiry.findAllByOrderByColor();
         }
 
         model.addAttribute("cars", auctions);
